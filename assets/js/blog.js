@@ -20,6 +20,8 @@ function readFromLocalStorage(key) {
 }
 
 // TODO: Call the function to render the list of blog posts
+renderPosts();
+
 function renderPosts() {
     const storedPosts = readFromLocalStorage("posts");
     if (!storedPosts) {
