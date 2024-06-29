@@ -1,3 +1,4 @@
+// Reminder: JSON.parse is used to convert a string to a JavaScript object.
 // TODO: Create a variable that selects the main element
 const main = document.querySelector("main");
 
@@ -19,3 +20,18 @@ function readFromLocalStorage(key) {
 }
 
 // TODO: Call the function to render the list of blog posts
+function renderPosts() {
+    const storedPosts = readFromLocalStorage("posts");
+    if (!storedPosts) {
+        handleNoPosts();
+        return;
+    }
+    const posts = JSON.parse(storedPosts);
+    posts.forEach((post) => {
+        const postElement = document.createElement("article");
+        postElement.classList.add("post");
+        createElementAndAppend("h2", post.title, postElement);
+        createElementAndAppend("p", post.content, postElement);
+        main.appendChild(postElement);
+    });
+}
