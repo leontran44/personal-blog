@@ -19,17 +19,15 @@ function readFromLocalStorage(key) {
     return JSON.parse(data);
 }
 
-// TODO: Call the function to render the list of blog posts
-renderPosts();
-
+// Function to render the list of blog posts
 function renderPosts() {
     const storedPosts = readFromLocalStorage("posts");
-    if (!storedPosts) {
+    if (!storedPosts || storedPosts.length === 0) { // Also check if the array is empty
         handleNoPosts();
         return;
     }
-    const posts = JSON.parse(storedPosts);
-    posts.forEach((post) => {
+
+    storedPosts.forEach((post) => {
         const postElement = document.createElement("article");
         postElement.classList.add("post");
         createElementAndAppend("h2", post.title, postElement);
@@ -37,3 +35,6 @@ function renderPosts() {
         main.appendChild(postElement);
     });
 }
+
+// Call the function to render the list of blog posts
+renderPosts();
